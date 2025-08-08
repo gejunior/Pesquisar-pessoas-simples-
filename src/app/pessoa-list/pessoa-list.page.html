@@ -1,0 +1,53 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Lista de Pessoas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+    
+  <ion-grid>
+    <ion-searchbar [debounce]="1000" (ionInput)="pesquisar($event)"></ion-searchbar>
+    <ion-list>
+      @for (pessoa of pessoasEncontradas; track pessoa) {
+      <ion-item>
+        <ion-label>{{ pessoa.nome }}</ion-label>
+      </ion-item>
+      }@empty {
+      <ion-item>
+        <ion-label>Nenhuma pessoa encontrada.</ion-label> 
+      </ion-item>
+      }
+    </ion-list>
+    
+    <ion-row class="header-row">
+      <ion-col><strong>Nome</strong></ion-col>
+      <ion-col><strong>Telefone</strong></ion-col>
+      <ion-col><strong>E-mail</strong></ion-col>
+    </ion-row>
+
+    <!-- <ion-row *ngFor="let pessoa of pessoas">
+      <ion-col>{{ pessoa.nome }}</ion-col>
+      <ion-col>{{ pessoa.telefone }}</ion-col>
+      <ion-col>{{ pessoa.email }}</ion-col>
+    </ion-row>  -->
+
+    @for (pessoa of pessoas; track pessoa.nome) {
+    <ion-row class="data-row">
+      <ion-col>{{ pessoa.nome }}</ion-col>
+      <ion-col>{{ pessoa.telefone }}</ion-col>
+      <ion-col>{{ pessoa.email }}</ion-col>
+    </ion-row>
+    } @empty {
+    <ion-row>
+      <ion-col> Não existem pessoas cadastradas. </ion-col>
+    </ion-row>
+    }
+  </ion-grid>
+
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button (click)="irPageHome()" size="small">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
